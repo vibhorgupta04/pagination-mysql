@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha '__tests__/*.test.js' --reporter mochawesome --recursive  --timeout 60000 --exit",
     "run": "nodemon ./src/index.js",
+    "start": "nodemon ./src/index.js",
     "create_db": "node ./src/createDatabase.js"
   },
   "author": "",

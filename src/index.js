@@ -26,6 +26,7 @@ app.get('/api/orders', (req, res) => {
       res.status(500).send('Internal Server Error');
       return;
     }
+    if (!results) res.status(404)
     res.status(200).json(results);
   });
 });
