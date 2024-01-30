@@ -3,12 +3,17 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 8080;
 require('dotenv').config();
+const swaggerDocument = require('./swagger.json');
+
+const swaggerUi = require('swagger-ui-express');
 
 // Parse JSON bodies (as sent by API clients)
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const connection = require('./connector');
 
+app.use('/api-docs', swaggerUi.serve);
+app.get('/api-docs', swaggerUi.setup(swaggerDocument));
 app.get('/api/orders', (req, res) => {
   const offset = +req.query.offset || 0;
   const limit = +req.query.limit || 10;
