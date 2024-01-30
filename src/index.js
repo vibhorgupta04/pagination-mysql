@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = 8080;
+require('dotenv').config();
 
 // Parse JSON bodies (as sent by API clients)
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -9,8 +10,6 @@ app.use(bodyParser.json());
 const connection = require('./connector');
 
 app.get('/api/orders', (req, res) => {
-  console.log("<<dsadsa>>",req.query);
-  // const {offset, limit} = req .query
   const offset = +req.query.offset || 0;
   const limit = +req.query.limit || 10;
   // const queryString = `SELECT * FROM orders LIMIT ${offset}, ${limit}`;
@@ -22,7 +21,7 @@ app.get('/api/orders', (req, res) => {
       res.status(500).send('Internal Server Error');
       return;
     }
-    res.json(results);
+    res.status(200).json(results);
   });
 });
 
